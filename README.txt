@@ -1,4 +1,5 @@
 -Ajouter Nico
 -Trouver un nom pour le jeu
--Créer un site
 -Commencer
+
+/!\ adresse du site web :  http://krapok.github.io/Projet
