@@ -1,5 +1,4 @@
 -Ajouter Nico
--Créer un Gravatar pour le groupe
 -Trouver un nom pour le jeu
 -Créer un site
 -Commencer
