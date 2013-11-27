@@ -1,4 +1,3 @@
--Ajouter Nico
 -Trouver un nom pour le jeu
 -Commencer
 
