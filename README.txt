@@ -1,4 +1,3 @@
--Trouver un nom pour le jeu
 -Commencer
 
-/!\ adresse du site web :  http://krapok.github.io/Projet
+/!\ adresse du site web :  http://krapok.github.io/Wall-E-Training-Lab/

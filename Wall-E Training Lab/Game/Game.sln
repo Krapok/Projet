@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wall-E Training Lab", "Wall-E Training Lab\Wall-E Training Lab\Wall-E Training Lab.csproj", "{FC82D18A-273D-46C1-BA0A-0F518546D7C0}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Wall-E Training LabContent", "Wall-E Training Lab\Wall-E Training LabContent\Wall-E Training LabContent.contentproj", "{1AC79F2F-5116-4FB2-9615-9655C6CE56A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC82D18A-273D-46C1-BA0A-0F518546D7C0}.Debug|x86.ActiveCfg = Debug|x86
+		{FC82D18A-273D-46C1-BA0A-0F518546D7C0}.Debug|x86.Build.0 = Debug|x86
+		{FC82D18A-273D-46C1-BA0A-0F518546D7C0}.Release|x86.ActiveCfg = Release|x86
+		{FC82D18A-273D-46C1-BA0A-0F518546D7C0}.Release|x86.Build.0 = Release|x86
+		{1AC79F2F-5116-4FB2-9615-9655C6CE56A6}.Debug|x86.ActiveCfg = Debug|x86
+		{1AC79F2F-5116-4FB2-9615-9655C6CE56A6}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
