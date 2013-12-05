@@ -23,11 +23,13 @@ namespace Wall_E_Training_Lab
         }
 
         private Texture2D wallTest;
+
+
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
 
-            wallTest = Content.Load<Texture2D>("wallETest");
+            wallTest = Content.Load<Texture2D>("walla");
             base.Initialize();
         }
 
@@ -49,7 +51,7 @@ namespace Wall_E_Training_Lab
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
+    
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -62,7 +64,7 @@ namespace Wall_E_Training_Lab
             // TODO: Add your drawing code here
 
             spriteBatch.Begin();
-            spriteBatch.Draw(wallTest, Vector2.Zero, Color.White);
+            spriteBatch.Draw(wallTest, new Vector2 (50,50), Color.Black);
             spriteBatch.End();
 
             base.Draw(gameTime);
