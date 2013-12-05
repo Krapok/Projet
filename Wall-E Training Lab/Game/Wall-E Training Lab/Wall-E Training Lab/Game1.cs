@@ -16,20 +16,26 @@ namespace Wall_E_Training_Lab
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        //déclaration des sprites
+        private WallE wallE;
+        private Sprite cube;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
-        private Texture2D wallTest;
-
-
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            //initialisation wall E
+            wallE = new WallE();
+            wallE.Initialize();
 
-            wallTest = Content.Load<Texture2D>("walla");
+            //initialisation cube
+            cube = new Sprite();
+            cube.Initialize();
+
             base.Initialize();
         }
 
@@ -38,7 +44,9 @@ namespace Wall_E_Training_Lab
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            //chargement ressources wall E et cube
+            wallE.LoadContent(Content, "walla");
+            cube.LoadContent(Content, "cube");
         }
 
         protected override void UnloadContent()
@@ -51,8 +59,18 @@ namespace Wall_E_Training_Lab
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-    
-            // TODO: Add your update logic here
+
+            // Etats de la souris et du clavier
+            KeyboardState keyboardState = Keyboard.GetState();
+            MouseState mouseState = Mouse.GetState();
+
+            //MaJ entrées joueurs et MaJ position wallE
+            wallE.HandleInput(keyboardState, mouseState);
+            wallE.Update(gameTime);
+
+            // inutile, là pour vérifier si le cube ne bouge pas en même tps que wall E
+            cube.HandleInput(keyboardState, mouseState);
+            cube.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -64,7 +82,10 @@ namespace Wall_E_Training_Lab
             // TODO: Add your drawing code here
 
             spriteBatch.Begin();
-            spriteBatch.Draw(wallTest, new Vector2 (50,50), Color.Black);
+
+            cube.Draw(spriteBatch, gameTime);
+            wallE.Draw(spriteBatch, gameTime);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
