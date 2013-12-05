@@ -22,10 +22,12 @@ namespace Wall_E_Training_Lab
             Content.RootDirectory = "Content";
         }
 
+        private Texture2D wallTest;
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
 
+            wallTest = Content.Load<Texture2D>("wallETest");
             base.Initialize();
         }
 
@@ -58,6 +60,10 @@ namespace Wall_E_Training_Lab
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(wallTest, Vector2.Zero, Color.White);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
