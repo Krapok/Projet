@@ -17,7 +17,7 @@ namespace Wall_E_Training_Lab
         SpriteBatch spriteBatch;
 
         //déclaration des sprites
-        private WallE wallE;
+        private Player wallE;
         private Sprite cube;
 
         public Game1()
@@ -29,12 +29,12 @@ namespace Wall_E_Training_Lab
         protected override void Initialize()
         {
             //initialisation wall E
-            wallE = new WallE();
-            wallE.Initialize();
+            wallE = new Player();
+            wallE.Initialize(new Vector2 (50,50), new Vector2 (37,49));
 
             //initialisation cube
             cube = new Sprite();
-            cube.Initialize();
+            cube.Initialize(Vector2.Zero, new Vector2 (32,32));
 
             base.Initialize();
         }
@@ -45,7 +45,7 @@ namespace Wall_E_Training_Lab
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //chargement ressources wall E et cube
-            wallE.LoadContent(Content, "walla");
+            wallE.LoadContent(Content, "player");
             cube.LoadContent(Content, "cube");
         }
 
@@ -68,10 +68,6 @@ namespace Wall_E_Training_Lab
             wallE.HandleInput(keyboardState, mouseState);
             wallE.Update(gameTime);
 
-            // inutile, là pour vérifier si le cube ne bouge pas en même tps que wall E
-            cube.HandleInput(keyboardState, mouseState);
-            cube.Update(gameTime);
-
             base.Update(gameTime);
         }
 
@@ -83,8 +79,9 @@ namespace Wall_E_Training_Lab
 
             spriteBatch.Begin();
 
+            //dessin walle et cube
             cube.Draw(spriteBatch, gameTime);
-            wallE.Draw(spriteBatch, gameTime);
+            wallE.Draw(spriteBatch, gameTime, new Rectangle(0,0,37,49));
 
             spriteBatch.End();
 
