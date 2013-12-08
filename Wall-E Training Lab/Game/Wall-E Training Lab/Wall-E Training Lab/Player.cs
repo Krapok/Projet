@@ -11,44 +11,96 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Wall_E_Training_Lab
 {
-    class Player : Sprite
+    class Player
     {
-        //gère les entrées du joueur
-        public virtual void HandleInput(Microsoft.Xna.Framework.Input.KeyboardState keyboardState, Microsoft.Xna.Framework.Input.MouseState mouseState)
+        //FIELDS
+        Vector2 initialPosition;
+        Rectangle Hitbox;
+        int speed = 2;
+
+        Map World;
+        List<Obstacle> obstacles;
+
+        //CONSTRUCTOR
+        public Player(Vector2 pos, Map whichworld)
         {
-            if (keyboardState.IsKeyDown(Keys.Z))
+            World = whichworld;
+            obstacles = World.Obstacles;
+            initialPosition = pos;
+            Hitbox = new Rectangle((int)initialPosition.X, (int)initialPosition.Y, 38, 48);
+        }
+
+        //METHODS
+
+        //UPDATE & DRAW
+        public void Update(MouseState mouse, KeyboardState keyboard)
+        {
+            if (keyboard.IsKeyDown(Keys.Z))
             {
-                Hitbox = new Rectangle(Hitbox.X, Hitbox.Y - 5, Hitbox.Width, Hitbox.Height);
+                Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y - speed, Hitbox.Width, Hitbox.Height);
+                bool collide = false;
+                foreach (Obstacle obstacle in obstacles)
+                {
+                    if (newHitbox.Intersects(obstacle.Hitbox))
+                    {
+                        collide = true;
+                        break;
+                    }
+                }
+                if (!collide)
+                    Hitbox.Y -= speed;
             }
-            else if (keyboardState.IsKeyDown(Keys.S))
+            else if (keyboard.IsKeyDown(Keys.S))
             {
-                Hitbox = new Rectangle(Hitbox.X, Hitbox.Y + 5, Hitbox.Width, Hitbox.Height);
+                Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y + speed, Hitbox.Width, Hitbox.Height);
+                bool collide = false;
+                foreach (Obstacle obstacle in obstacles)
+                {
+                    if (newHitbox.Intersects(obstacle.Hitbox))
+                    {
+                        collide = true;
+                        break;
+                    }
+                }
+                if (!collide)
+                    Hitbox.Y += speed;
             }
 
-            if (keyboardState.IsKeyDown(Keys.Q))
+            if (keyboard.IsKeyDown(Keys.Q))
             {
-                Hitbox = new Rectangle(Hitbox.X - 5, Hitbox.Y, Hitbox.Width, Hitbox.Height);
+                Rectangle newHitbox = new Rectangle(Hitbox.X - speed, Hitbox.Y, Hitbox.Width, Hitbox.Height);
+                bool collide = false;
+                foreach (Obstacle obstacle in obstacles)
+                {
+                    if (newHitbox.Intersects(obstacle.Hitbox))
+                    {
+                        collide = true;
+                        break;
+                    }
+                }
+                if (!collide)
+                    Hitbox.X -= speed;
             }
-            else if (keyboardState.IsKeyDown(Keys.D))
+            else if (keyboard.IsKeyDown(Keys.D))
             {
-                Hitbox = new Rectangle(Hitbox.X + 5, Hitbox.Y, Hitbox.Width, Hitbox.Height);
+                Rectangle newHitbox = new Rectangle(Hitbox.X + speed, Hitbox.Y, Hitbox.Width, Hitbox.Height);
+                bool collide = false;
+                foreach (Obstacle obstacle in obstacles)
+                {
+                    if (newHitbox.Intersects(obstacle.Hitbox))
+                    {
+                        collide = true;
+                        break;
+                    }
+                }
+                if (!collide)
+                    Hitbox.X += speed;
             }
         }
 
-        // Met à jour les variables du joueur
-        public virtual void Update(GameTime gameTime)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            Hitbox = new Rectangle(
-                Hitbox.X,
-                Hitbox.Y,
-                (int)Size.X,
-                (int)Size.Y);
-        }
-
-        // Dessine le joueur en utilisant ses attributs,le spritebatch donné, et le rectangle sur le sprite complet
-        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, Rectangle textureRectangle)
-        {
-            spriteBatch.Draw(Texture, new Vector2(Hitbox.X, Hitbox.Y), textureRectangle, Color.White);
+            spriteBatch.Draw(Resources.Player, Hitbox, Color.White);
         }
 
     }
