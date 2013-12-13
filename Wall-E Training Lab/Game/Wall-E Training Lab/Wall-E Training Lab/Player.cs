@@ -33,68 +33,66 @@ namespace Wall_E_Training_Lab
         //METHODS
 
         //UPDATE & DRAW
+        bool jumping = false;
+        int jumpRound = 50;
+        float gravity = 5f;
+        float jump = -5f;
+        float coeffPhysicJump = 0.7f;
+        float coeffPhysicGravity = 1.3f;
         public void Update(MouseState mouse, KeyboardState keyboard)
         {
-            if (keyboard.IsKeyDown(Keys.Z))
+            Vector2 movement = Vector2.Zero;
+
+            if (keyboard.IsKeyDown(Keys.W))
             {
-                Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y - speed, Hitbox.Width, Hitbox.Height);
-                bool collide = false;
-                foreach (Obstacle obstacle in obstacles)
+                if (!jumping)
                 {
-                    if (newHitbox.Intersects(obstacle.Hitbox))
-                    {
-                        collide = true;
-                        break;
-                    }
+                    jump = -5f;
+                    jumping = true;
                 }
-                if (!collide)
-                    Hitbox.Y -= speed;
-            }
-            else if (keyboard.IsKeyDown(Keys.S))
-            {
-                Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y + speed, Hitbox.Width, Hitbox.Height);
-                bool collide = false;
-                foreach (Obstacle obstacle in obstacles)
-                {
-                    if (newHitbox.Intersects(obstacle.Hitbox))
-                    {
-                        collide = true;
-                        break;
-                    }
-                }
-                if (!collide)
-                    Hitbox.Y += speed;
             }
 
-            if (keyboard.IsKeyDown(Keys.Q))
+            if (jumping && jumpRound > 0)
             {
-                Rectangle newHitbox = new Rectangle(Hitbox.X - speed, Hitbox.Y, Hitbox.Width, Hitbox.Height);
-                bool collide = false;
-                foreach (Obstacle obstacle in obstacles)
-                {
-                    if (newHitbox.Intersects(obstacle.Hitbox))
-                    {
-                        collide = true;
-                        break;
-                    }
-                }
-                if (!collide)
-                    Hitbox.X -= speed;
+                movement.Y = jump * coeffPhysicJump;
+                jumpRound -= 1;
+            }
+            else
+            {
+                movement.Y = gravity * coeffPhysicGravity;
+                jumping = false;
+                jumpRound = 50; // Has to be the same as the init one
+            }
+
+
+            if (keyboard.IsKeyDown(Keys.A))
+            {
+                movement.X = -speed;
             }
             else if (keyboard.IsKeyDown(Keys.D))
             {
-                Rectangle newHitbox = new Rectangle(Hitbox.X + speed, Hitbox.Y, Hitbox.Width, Hitbox.Height);
-                bool collide = false;
-                foreach (Obstacle obstacle in obstacles)
-                {
-                    if (newHitbox.Intersects(obstacle.Hitbox))
-                    {
-                        collide = true;
-                        break;
-                    }
-                }
-                if (!collide)
-                    Hitbox.X += speed;
+                movement.X = speed;
+            }
+
+
+
+
+
+            Rectangle newHitboxX = new Rectangle(Hitbox.X + (int)movement.X, Hitbox.Y, Hitbox.Width, Hitbox.Height);
+            Rectangle newHitboxY = new Rectangle(Hitbox.X, Hitbox.Y + (int)movement.Y, Hitbox.Width, Hitbox.Height);
+
+            if (!Collisions.IsColliding(newHitboxX, obstacles))
+            {
+                Hitbox.X += (int)movement.X;
+            }
+            if (!Collisions.IsColliding(newHitboxY, obstacles))
+            {
+                Hitbox.Y += (int)movement.Y;
+            }
+            else
+            {
+                jump = -5f;
+                gravity = 5f;
             }
         }
 

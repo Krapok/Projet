@@ -27,6 +27,8 @@ namespace Wall_E_Training_Lab
             obstacles = new List<Obstacle>();
             obstacles.Add(new Obstacle(20, 20, Resources.Obstacle));
             obstacles.Add(new Obstacle(100, 120, Resources.Obstacle));
+            obstacles.Add(new Obstacle(50, 450, Resources.Obstacle));
+
 
             mapTest = new Map(obstacles);
 
